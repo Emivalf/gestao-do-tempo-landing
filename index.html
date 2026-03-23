@@ -383,20 +383,28 @@
         /* ===== FOOTER ===== */
         footer {
             background: #0a0a14; color: rgba(255,255,255,0.35); text-align: center;
-            padding: 32px 24px; font-size: 0.85rem;
+            padding: 32px 24px 100px; font-size: 0.85rem;
         }
         footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
 
         /* ===== FLOATING CTA ===== */
         .floating-cta {
             display: none; position: fixed; bottom: 0; left: 0; right: 0;
-            background: var(--white); padding: 12px 16px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.15); z-index: 1000; text-align: center;
+            background: rgba(255,255,255,0.97); padding: 12px 24px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15); z-index: 1000;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        .floating-cta .btn-cta { width: 100%; padding: 16px; font-size: 1rem; }
+        .floating-cta-inner {
+            max-width: 900px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+        }
+        .floating-cta-text { font-size: 0.9rem; font-weight: 700; color: var(--dark); }
+        .floating-cta-text span { color: var(--accent); }
+        .floating-cta .btn-cta { padding: 14px 32px; font-size: 0.95rem; white-space: nowrap; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            .comparison div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
             .hero { padding: 48px 24px 0; }
             .hero h1 { font-size: 1.85rem; }
             .hero p.subtitle { font-size: 1rem; }
@@ -418,9 +426,11 @@
             .btn-cta-large { padding: 18px 40px; font-size: 1.1rem; }
             .guarantee-box { flex-direction: column; text-align: center; }
             .price-box { padding: 36px 24px; }
-            .floating-cta { display: block; }
-            .final-cta { padding-bottom: 120px; }
-            footer { padding-bottom: 100px; }
+            .floating-cta-inner { flex-direction: column; gap: 8px; }
+            .floating-cta-text { font-size: 0.82rem; }
+            .floating-cta .btn-cta { width: 100%; padding: 14px; }
+            .final-cta { padding-bottom: 140px; }
+            footer { padding-bottom: 120px; }
         }
 
         .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -429,9 +439,9 @@
 </head>
 <body>
 
-    <!-- TOP BAR -->
+    <!-- TOP BAR with countdown -->
     <div class="top-bar">
-        <span>OFERTA ESPECIAL</span> &mdash; O mesmo metodo usado pelo Comite Olimpico Brasileiro agora acessivel para voce
+        <span>OFERTA POR TEMPO LIMITADO</span> &mdash; Encerra em <strong id="countdown">23:59:59</strong>
     </div>
 
     <!-- HERO -->
@@ -546,6 +556,41 @@
                     <h3>Modo "pressa" permanente</h3>
                     <p>Corre o dia todo, trabalha ate tarde, mas sente que esta sempre atrasado.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE vs AFTER -->
+    <section class="comparison" style="padding:80px 24px;background:#f5f5ff;">
+        <div class="container">
+            <h2 class="section-title">Sem metodo vs. Com a Metodologia PLENA</h2>
+            <p class="section-subtitle">A diferenca entre quem adivinha e quem tem um sistema.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:760px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 8px 48px rgba(0,0,0,0.12);">
+                <div style="background:#fce4ec;padding:36px 28px;">
+                    <h3 style="color:#c62828;font-size:1.1rem;font-weight:800;margin-bottom:20px;text-align:center;">&#10060; Sem metodo</h3>
+                    <ul style="list-style:none;padding:0;">
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#555;">Acorda ja pensando nas urgencias dos outros</li>
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#555;">Procrastina o que importa e se sente culpado</li>
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#555;">Termina o dia exausto sem ter feito nada relevante</li>
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#555;">Projetos parados ha meses (ou anos)</li>
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#555;">Sacrifica familia, saude e lazer</li>
+                        <li style="padding:10px 0;font-size:0.92rem;color:#555;">Sensacao constante de estar atrasado</li>
+                    </ul>
+                </div>
+                <div style="background:#e8f5e9;padding:36px 28px;">
+                    <h3 style="color:#2e7d32;font-size:1.1rem;font-weight:800;margin-bottom:20px;text-align:center;">&#9989; Com PLENA</h3>
+                    <ul style="list-style:none;padding:0;">
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#333;font-weight:600;">Comeca o dia sabendo exatamente o que fazer</li>
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#333;font-weight:600;">Executa o importante antes que vire urgente</li>
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#333;font-weight:600;">Termina o dia com sensacao de progresso real</li>
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#333;font-weight:600;">Projetos avancam toda semana com ritmo</li>
+                        <li style="padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:0.92rem;color:#333;font-weight:600;">Tempo para trabalho, familia e voce</li>
+                        <li style="padding:10px 0;font-size:0.92rem;color:#333;font-weight:600;">Tranquilidade de quem tem controle</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:36px;">
+                <a href="https://hotmart.com/pt-br/marketplace/produtos/gestao-do-tempo-e-produtividade-5-0-o-segredo-para-conquistar-tempo-dinheiro-e-uma-vida-plena/K91586515F" class="btn-cta">Quero Ter o Controle do Meu Tempo</a>
             </div>
         </div>
     </section>
@@ -665,12 +710,47 @@
         </div>
     </section>
 
+    <!-- TESTIMONIALS -->
+    <section style="padding:80px 24px;background:var(--white);">
+        <div class="container">
+            <h2 class="section-title">O que dizem quem ja aplicou o metodo</h2>
+            <p class="section-subtitle">Resultados reais de pessoas reais. +500 mil ja passaram pelo treinamento.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto;">
+                <div style="background:#fafafa;border-radius:12px;padding:28px;border:1px solid #e9ecef;position:relative;">
+                    <div style="color:var(--gold);font-size:1.2rem;margin-bottom:8px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p style="font-size:0.95rem;color:#444;font-style:italic;margin-bottom:16px;">"Em 3 semanas aplicando o metodo PLENA, consegui tirar do papel um projeto que estava parado ha 8 meses. Parece magica, mas e metodo."</p>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;">CA</div>
+                        <div><strong style="font-size:0.88rem;color:#333;">Carlos A.</strong><br><span style="font-size:0.78rem;color:#999;">Empresario, SP</span></div>
+                    </div>
+                </div>
+                <div style="background:#fafafa;border-radius:12px;padding:28px;border:1px solid #e9ecef;">
+                    <div style="color:var(--gold);font-size:1.2rem;margin-bottom:8px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p style="font-size:0.95rem;color:#444;font-style:italic;margin-bottom:16px;">"Eu achava que meu problema era falta de disciplina. Descobri que era falta de metodo. Hoje consigo conciliar emprego, pos-graduacao e academia sem surtar."</p>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;">FM</div>
+                        <div><strong style="font-size:0.88rem;color:#333;">Fernanda M.</strong><br><span style="font-size:0.78rem;color:#999;">Advogada, RJ</span></div>
+                    </div>
+                </div>
+                <div style="background:#fafafa;border-radius:12px;padding:28px;border:1px solid #e9ecef;">
+                    <div style="color:var(--gold);font-size:1.2rem;margin-bottom:8px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p style="font-size:0.95rem;color:#444;font-style:italic;margin-bottom:16px;">"Sou medico e vivia no modo 'apagar incendio'. O Rafael me mostrou que 80% das minhas urgencias eram falta de planejamento. Mudou minha rotina completamente."</p>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;">RL</div>
+                        <div><strong style="font-size:0.88rem;color:#333;">Dr. Ricardo L.</strong><br><span style="font-size:0.78rem;color:#999;">Medico, MG</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- MID CTA -->
     <section class="mid-cta">
         <div class="container">
             <h2>Cada dia sem metodo e um dia desperdicado</h2>
             <p>O tempo vai passar de qualquer forma. A diferenca e o que voce faz com ele.</p>
             <a href="https://hotmart.com/pt-br/marketplace/produtos/gestao-do-tempo-e-produtividade-5-0-o-segredo-para-conquistar-tempo-dinheiro-e-uma-vida-plena/K91586515F" class="btn-cta">Quero Comecar Agora</a>
+            <p style="margin-top:12px;font-size:0.82rem;color:rgba(255,255,255,0.45);">Junte-se a +500 mil pessoas que ja transformaram sua rotina</p>
         </div>
     </section>
 
@@ -753,25 +833,45 @@
     </section>
 
     <!-- PRICING -->
-    <section class="pricing">
+    <section class="pricing" id="preco">
         <div class="container">
-            <h2 class="section-title">Invista no recurso mais valioso que existe</h2>
-            <p class="section-subtitle">Voce gasta dinheiro com coisas que economizam minutos. Este curso economiza anos.</p>
+            <h2 class="section-title">Quanto vale ter o controle do seu tempo?</h2>
+            <p class="section-subtitle">Uma unica palestra do Rafael para empresas custa mais de R$ 15.000. Aqui voce tem acesso ao metodo completo por uma fracao.</p>
             <div class="price-box fade-in">
                 <div class="price-ribbon">OFERTA</div>
                 <h3>Gestao do Tempo e Produtividade 4.0</h3>
-                <div class="original">De R$ 997</div>
+                <div style="margin:16px 0;padding:16px;background:#fff3e0;border-radius:8px;">
+                    <div style="font-size:0.82rem;color:#e65100;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Voce nao vai pagar</div>
+                    <div style="font-size:1rem;color:#999;text-decoration:line-through;">R$ 15.000 (valor de uma palestra corporativa)</div>
+                    <div style="font-size:1rem;color:#999;text-decoration:line-through;">R$ 4.997 (valor de uma mentoria individual)</div>
+                    <div style="font-size:1rem;color:#999;text-decoration:line-through;">R$ 997 (valor original do curso)</div>
+                </div>
                 <div class="price">Valor Promocional</div>
-                <div class="price-note">Consulte o valor atual na pagina de checkout</div>
-                <a href="https://hotmart.com/pt-br/marketplace/produtos/gestao-do-tempo-e-produtividade-5-0-o-segredo-para-conquistar-tempo-dinheiro-e-uma-vida-plena/K91586515F" class="btn-cta">Ver Valor e Garantir Minha Vaga</a>
+                <div class="price-note">Consulte o valor com desconto na pagina de checkout</div>
+                <a href="https://hotmart.com/pt-br/marketplace/produtos/gestao-do-tempo-e-produtividade-5-0-o-segredo-para-conquistar-tempo-dinheiro-e-uma-vida-plena/K91586515F" class="btn-cta" style="font-size:1.2rem;">Garantir Minha Vaga com Desconto</a>
                 <ul class="price-includes">
                     <li>+20 horas de conteudo em video de alta qualidade</li>
                     <li>Metodologia PLENA completa (a mesma do COB e da Porsche)</li>
                     <li>Graficos, imagens e materiais de apoio</li>
                     <li>Acesso ilimitado 24/7 em qualquer dispositivo</li>
-                    <li>Acesso a comunidade exclusiva</li>
-                    <li>Garantia de satisfacao</li>
+                    <li>Acesso a comunidade exclusiva de alunos</li>
+                    <li>Garantia de satisfacao — risco zero</li>
                 </ul>
+                <!-- Trust badges -->
+                <div style="display:flex;justify-content:center;gap:24px;margin-top:24px;padding-top:20px;border-top:1px solid #e9ecef;flex-wrap:wrap;">
+                    <div style="text-align:center;font-size:0.72rem;color:#999;font-weight:600;">
+                        <div style="font-size:1.3rem;margin-bottom:2px;">&#128274;</div>Compra<br>Segura
+                    </div>
+                    <div style="text-align:center;font-size:0.72rem;color:#999;font-weight:600;">
+                        <div style="font-size:1.3rem;margin-bottom:2px;">&#128737;</div>Garantia<br>de Satisfacao
+                    </div>
+                    <div style="text-align:center;font-size:0.72rem;color:#999;font-weight:600;">
+                        <div style="font-size:1.3rem;margin-bottom:2px;">&#9889;</div>Acesso<br>Imediato
+                    </div>
+                    <div style="text-align:center;font-size:0.72rem;color:#999;font-weight:600;">
+                        <div style="font-size:1.3rem;margin-bottom:2px;">&#127760;</div>Plataforma<br>Hotmart
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -845,10 +945,14 @@
 
     <!-- FLOATING CTA -->
     <div class="floating-cta" id="floatingCta">
-        <a href="https://hotmart.com/pt-br/marketplace/produtos/gestao-do-tempo-e-produtividade-5-0-o-segredo-para-conquistar-tempo-dinheiro-e-uma-vida-plena/K91586515F" class="btn-cta">Quero Dominar Meu Tempo &rarr;</a>
+        <div class="floating-cta-inner">
+            <div class="floating-cta-text">&#128293; Oferta encerra em <span id="countdown2">23:59:59</span></div>
+            <a href="https://hotmart.com/pt-br/marketplace/produtos/gestao-do-tempo-e-produtividade-5-0-o-segredo-para-conquistar-tempo-dinheiro-e-uma-vida-plena/K91586515F" class="btn-cta">Garantir Minha Vaga &rarr;</a>
+        </div>
     </div>
 
     <script>
+        // FAQ accordion
         document.querySelectorAll('.faq-question').forEach(function(q) {
             q.addEventListener('click', function() {
                 var item = this.parentElement, isOpen = item.classList.contains('open');
@@ -856,16 +960,40 @@
                 if (!isOpen) item.classList.add('open');
             });
         });
+
+        // Scroll animations
         var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+
+        // Floating CTA on ALL devices after scrolling past hero
         var fc = document.getElementById('floatingCta'), hs = document.querySelector('.hero');
-        if (window.innerWidth <= 768) {
-            window.addEventListener('scroll', function() {
-                fc.style.display = hs.getBoundingClientRect().bottom < 0 ? 'block' : 'none';
-            });
+        window.addEventListener('scroll', function() {
+            fc.style.display = hs.getBoundingClientRect().bottom < 0 ? 'block' : 'none';
+        });
+
+        // Countdown timer (resets daily at midnight)
+        function startCountdown() {
+            var now = new Date();
+            var endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+            function update() {
+                var now = new Date();
+                var diff = endOfDay - now;
+                if (diff <= 0) { endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 23, 59, 59); diff = endOfDay - now; }
+                var h = Math.floor(diff / 3600000);
+                var m = Math.floor((diff % 3600000) / 60000);
+                var s = Math.floor((diff % 60000) / 1000);
+                var str = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+                var el1 = document.getElementById('countdown');
+                var el2 = document.getElementById('countdown2');
+                if (el1) el1.textContent = str;
+                if (el2) el2.textContent = str;
+            }
+            update();
+            setInterval(update, 1000);
         }
+        startCountdown();
     </script>
 
 </body>
